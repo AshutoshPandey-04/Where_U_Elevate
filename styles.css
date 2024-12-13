@@ -48,3 +48,6 @@ p {
   .p3 {
     font-family: "Lucida Console", "Courier New", monospace;
   }
+  a:link {
+    color: tomato;
+  }
