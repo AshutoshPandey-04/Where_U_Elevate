@@ -1,3 +1,4 @@
+/* General Body Styling */
 body {
     font-family: Arial, sans-serif;
     height: 100vh;
@@ -10,6 +11,7 @@ body {
     color: #ffffff;
 }
 
+/* Content Styling */
 .content {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
@@ -20,12 +22,14 @@ body {
     box-sizing: border-box;
 }
 
+/* Element Styling */
 h1, h2, h3, h4, h5, p, ol, table, form {
     margin: 20px 0;
     display: inline-block;
     box-sizing: border-box;
 }
 
+/* Form Styling */
 form {
     margin-top: 20px;
     text-align: center;
@@ -58,12 +62,14 @@ form input[type="submit"]:hover {
     background-color: #2a6774;
 }
 
+/* Header Image Styling */
 .header-image {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
+/* Header Styling */
 h1 {
     background-color: rgba(0, 0, 0, 0.7);
     color: #ffffff;
@@ -71,6 +77,7 @@ h1 {
     border-radius: 5px;
 }
 
+/* Paragraph Font Families */
 .p1 {
     font-family: "Times New Roman", Times, serif;
 }
@@ -83,12 +90,14 @@ h1 {
     font-family: 'Times New Roman', Times, serif;
 }
 
+/* Link Styling */
 a:link {
     color: tomato;
     display: inline-block;
     margin: 10px 0;
 }
 
+/* List Styling */
 ul.a {
     list-style-type: circle;
 }
@@ -105,6 +114,7 @@ ol.d {
     list-style-type: lower-alpha;
 }
 
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -120,15 +130,18 @@ th, td {
     text-align: left;
 }
 
+/* List Item Styling */
 li {
     display: inline;
 }
 
+/* Static Div Example */
 div.static {
     position: static;
     border: 3px solid #91f307;
 }
 
+/* Flex Container Example */
 .flex-container {
     display: flex;
     justify-content: space-around;
@@ -144,3 +157,17 @@ div.static {
     line-height: 75px;
     font-size: 30px;
 }
+
+/* Column Width Classes */
+.col-1 { width: 8.33%; }
+.col-2 { width: 16.66%; }
+.col-3 { width: 25%; }
+.col-4 { width: 33.33%; }
+.col-5 { width: 41.66%; }
+.col-6 { width: 50%; }
+.col-7 { width: 58.33%; }
+.col-8 { width: 66.66%; }
+.col-9 { width: 75%; }
+.col-10 { width: 83.33%; }
+.col-11 { width: 91.66%; }
+.col-12 { width: 100%; }
