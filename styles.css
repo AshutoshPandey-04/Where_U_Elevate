@@ -3,65 +3,65 @@ body {
     font-family: Arial, sans-serif;
     height: 100vh;
     background: url('https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop') no-repeat center center fixed;
-    background-size: cover; /* Ensures the image covers the entire background */
+    background-size: cover; 
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff; /* White text color for better contrast against dark images */
+    color: #ffffff; 
 }
 
 .content {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    background-color: rgba(0, 0, 0, 0.5); 
     padding: 20px;
     border-radius: 10px;
     max-width: 600px;
     text-align: center;
-    transform: rotate(180deg); /* Rotate the content 180 degrees */
+    transform: rotate(180deg); 
 }
 
-/* Element Styling */
+
 h1, h2, h3, h4, h5, p, ol, table, form {
     margin: 20px;
     display: inline-block;
 }
 
-/* Header Image Styling */
+
 .header-image {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-/* Header Styling */
+
 h1 {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
-    color: #ffffff; /* White text color for contrast */
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #ffffff; 
     padding: 10px;
     border-radius: 5px;
 }
 
-/* Paragraph Font Families */
+
 .p1 {
     font-family: "Times New Roman", Times, serif;
 }
 
 .p2 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .p3 {
-    font-family: "Lucida Console", "Courier New", monospace;
+    font-family: 'Times New Roman', Times, serif;
 }
 
-/* Link Styling */
+
 a:link {
     color: tomato;
     display: inline-block;
     margin: 10px 0;
 }
 
-/* List Styling */
+
 ul.a {
     list-style-type: circle;
 }
@@ -78,7 +78,7 @@ ol.d {
     list-style-type: lower-alpha;
 }
 
-/* Table Styling */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -94,7 +94,7 @@ th, td {
     text-align: left;
 }
 
-/* Form Styling */
+
 form {
     margin-top: 20px;
     text-align: left;
