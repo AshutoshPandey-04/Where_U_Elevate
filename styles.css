@@ -119,3 +119,11 @@ th, td {
     padding: 10px;
     text-align: left;
 }
+li {
+    display: inline;
+  }
+  div.static {
+    position: static;
+    border: 3px solid #91f307;
+  }
+  
