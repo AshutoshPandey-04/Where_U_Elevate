@@ -11,3 +11,9 @@ body {
     background-image: "https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop" ("futureuniversity.jpg");
 }
 p.inset {border-style: inset;}
+p {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+  }
