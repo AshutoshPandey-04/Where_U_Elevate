@@ -1,68 +1,127 @@
-p {
-    text-align: center;
-    color: black;
-  }
-
+/* General Body Styling */
 body {
-    background-color: lightblue;
-  }
-
-body {
-    background-image: "https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop" ("futureuniversity.jpg");
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background: url('https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire background */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; /* White text color for better contrast against dark images */
 }
-p.inset {border-style: inset;}
-p {
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
-  }
-  div {
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 80px;
-  }
-  body {
-    background-color: lightgrey;
-    color: blue;
-  }
-  
-  h1 {
-    background-color: black;
-    color: white;
-  }
-  
-  div {
-    background-color: blue;
-    color: white;
-  }
-  .p1 {
+
+.content {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    text-align: center;
+    transform: rotate(180deg); /* Rotate the content 180 degrees */
+}
+
+/* Element Styling */
+h1, h2, h3, h4, h5, p, ol, table, form {
+    margin: 20px;
+    display: inline-block;
+}
+
+/* Header Image Styling */
+.header-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Header Styling */
+h1 {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+    color: #ffffff; /* White text color for contrast */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Paragraph Font Families */
+.p1 {
     font-family: "Times New Roman", Times, serif;
-  }
-  
-  .p2 {
+}
+
+.p2 {
     font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .p3 {
+}
+
+.p3 {
     font-family: "Lucida Console", "Courier New", monospace;
-  }
-  a:link {
+}
+
+/* Link Styling */
+a:link {
     color: tomato;
-  }
-  ul.a {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+/* List Styling */
+ul.a {
     list-style-type: circle;
-  }
-  
-  ul.b {
+}
+
+ul.b {
     list-style-type: square;
-  }
-  
-  ol.c {
+}
+
+ol.c {
     list-style-type: upper-roman;
-  }
-  
-  ol.d {
+}
+
+ol.d {
     list-style-type: lower-alpha;
-  }
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ffffff;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Form Styling */
+form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="submit"] {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: calc(100% - 20px);
+}
+
+input[type="submit"] {
+    background-color: #3b8d99;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2a6774;
+}
