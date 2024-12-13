@@ -119,11 +119,28 @@ th, td {
     padding: 10px;
     text-align: left;
 }
+
 li {
     display: inline;
-  }
-  div.static {
+}
+
+div.static {
     position: static;
     border: 3px solid #91f307;
-  }
-  
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    border: 3px solid #91f307;
+}
+
+.flex-container > div {
+    background-color: DodgerBlue;
+    color: white;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
