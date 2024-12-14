@@ -14,6 +14,7 @@ const universityName = "Future University";
 let studentsCount = 1500;
 const isCollegeOpen = true;
 
+
 const courseNames = ["B.Tech", "B.C.A", "M.C.A", "B.Pharma", "MBA"];
 const studentsCounts = [1500, 700, 650, 1800, 500];
 
@@ -62,14 +63,13 @@ let unassignedVariable = undefined;
 
 let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee; 
 totalFees -= 10000; 
-totalFees *= 2; 
+totalFees *= 2;
 totalFees /= 4; 
-let remainder = totalFees % 3;
+let remainder = totalFees % 3; 
 
 
 let isMoreExpensive = courseDetails.BPharma.fee > courseDetails.BCA.fee; 
 let isEqualFee = courseDetails.BTech.fee == courseDetails.MCA?.fee; 
-
 
 let areBothAvailable = isCollegeOpen && (studentsCount > 1000); 
 let isAnyAvailable = isCollegeOpen || (studentsCount > 2000); 
@@ -123,6 +123,28 @@ function getHOD(courseName) {
     return "Course not found";
 }
 
+
+function getTotalStudents() {
+    return studentsCounts.reduce((total, count) => total + count, 0);
+}
+
+
+function findCourse(courseName) {
+    const index = courseNames.indexOf(courseName);
+    if (index !== -1) {
+        return `Course found: ${courseNames[index]} with ${studentsCounts[index]} students`;
+    }
+    return "Course not found";
+}
+
+
+function addCourse(newCourseName, studentCount) {
+    courseNames.push(newCourseName);
+    studentsCounts.push(studentCount);
+    return `Course ${newCourseName} added with ${studentCount} students`;
+}
+
+
 displayUniversityInfo();
 displayCourseDetails("BTech");
 console.log(`Total Fee of all courses: ${calculateTotalFee()}`);
@@ -132,3 +154,8 @@ console.log(welcomeMessage);
 console.log(`Arithmetic: Total Fees = ${totalFees}, Remainder = ${remainder}`);
 console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensive}`);
 console.log(`Logical: Are both available? ${areBothAvailable}`);
+console.log(`Total Students: ${getTotalStudents()}`);
+console.log(findCourse("B.Tech"));
+console.log(addCourse("Ph.D", 300));
+console.log(courseNames);
+console.log(studentsCounts);
