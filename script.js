@@ -17,6 +17,7 @@ const isCollegeOpen = true;
 const courseNames = ["B.Tech", "B.C.A", "M.C.A", "B.Pharma", "MBA"];
 const studentsCounts = [1500, 700, 650, 1800, 500];
 
+
 const courseDetails = {
     BTech: {
         name: "B.Tech",
@@ -56,14 +57,14 @@ const courseDetails = {
 };
 
 let notAssigned = null;
-let unassignedVariable;
+let unassignedVariable = undefined;
 
 
 let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee; 
 totalFees -= 10000; 
 totalFees *= 2; 
 totalFees /= 4; 
-let remainder = totalFees % 3; 
+let remainder = totalFees % 3;
 
 
 let isMoreExpensive = courseDetails.BPharma.fee > courseDetails.BCA.fee; 
@@ -75,7 +76,7 @@ let isAnyAvailable = isCollegeOpen || (studentsCount > 2000);
 let isNotAvailable = !isCollegeOpen; 
 
 
-studentsCount += 500;
+studentsCount += 500; 
 studentsCount -= 200; 
 studentsCount *= 2; 
 studentsCount /= 4; 
