@@ -11,10 +11,8 @@ const coursesList = document.querySelector('.c');
 const coursesTable = document.querySelector('table');
 
 const universityName = "Future University";
-
 const totalCourses = 5;
 const studentsCount = 1500;
-
 const isCollegeOpen = true;
 
 const courseNames = ["B.Tech", "B.C.A", "M.C.A", "B.Pharma", "MBA"];
@@ -54,13 +52,39 @@ const courseDetails = {
         duration: "2 Years",
         fee: 50000,
         students: 500,
-        hod: "Mr. Virendra Singh"
+        hod: "Mr. Virendra"
     }
 };
 
 let notAssigned = null;
-
 let unassignedVariable;
+
+
+let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee;
+totalFees -= 10000; 
+totalFees *= 2; 
+totalFees /= 4; 
+let remainder = totalFees % 3; 
+
+
+let isMoreExpensive = courseDetails.BPharma.fee > courseDetails.BCA.fee; 
+let isEqualFee = courseDetails.BTech.fee == courseDetails.MCA?.fee; 
+
+
+let areBothAvailable = isCollegeOpen && isEngineeringAvailable; 
+let isAnyAvailable = isCollegeOpen || false;
+let isNotAvailable = !isCollegeOpen;
+
+
+studentsCount += 500; 
+studentsCount -= 200; 
+studentsCount *= 2; 
+studentsCount /= 4; 
+
+
+let welcomeMessage = "Welcome to " + universityName; 
+
+console.log(universityName, totalCourses, studentsCount, isCollegeOpen, courseNames, courseDetails, notAssigned, unassignedVariable, totalFees, remainder, isMoreExpensive, isEqualFee, areBothAvailable, isAnyAvailable, isNotAvailable, welcomeMessage);
 
 function displayUniversityInfo() {
     console.log(`Welcome to ${universityName}`);
