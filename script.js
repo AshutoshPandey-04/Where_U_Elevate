@@ -63,13 +63,14 @@ let unassignedVariable = undefined;
 
 let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee; 
 totalFees -= 10000; 
-totalFees *= 2;
+totalFees *= 2; 
 totalFees /= 4; 
 let remainder = totalFees % 3; 
 
 
 let isMoreExpensive = courseDetails.BPharma.fee > courseDetails.BCA.fee; 
 let isEqualFee = courseDetails.BTech.fee == courseDetails.MCA?.fee; 
+
 
 let areBothAvailable = isCollegeOpen && (studentsCount > 1000); 
 let isAnyAvailable = isCollegeOpen || (studentsCount > 2000); 
@@ -123,6 +124,12 @@ function getHOD(courseName) {
     return "Course not found";
 }
 
+function displayAllCourses() {
+    for (let i = 0; i < courseNames.length; i++) {
+        console.log(`Course: ${courseNames[i]}, Students: ${studentsCounts[i]}`);
+    }
+}
+
 
 function getTotalStudents() {
     return studentsCounts.reduce((total, count) => total + count, 0);
@@ -154,6 +161,7 @@ console.log(welcomeMessage);
 console.log(`Arithmetic: Total Fees = ${totalFees}, Remainder = ${remainder}`);
 console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensive}`);
 console.log(`Logical: Are both available? ${areBothAvailable}`);
+displayAllCourses();
 console.log(`Total Students: ${getTotalStudents()}`);
 console.log(findCourse("B.Tech"));
 console.log(addCourse("Ph.D", 300));
