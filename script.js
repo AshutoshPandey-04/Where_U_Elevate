@@ -124,9 +124,21 @@ function getHOD(courseName) {
     return "Course not found";
 }
 
+
 function displayAllCourses() {
     for (let i = 0; i < courseNames.length; i++) {
         console.log(`Course: ${courseNames[i]}, Students: ${studentsCounts[i]}`);
+    }
+}
+
+
+function checkStudentsThreshold(threshold) {
+    if (studentsCount > threshold) {
+        console.log(`Students count (${studentsCount}) is above the threshold (${threshold})`);
+    } else if (studentsCount === threshold) {
+        console.log(`Students count (${studentsCount}) is exactly the threshold (${threshold})`);
+    } else {
+        console.log(`Students count (${studentsCount}) is below the threshold (${threshold})`);
     }
 }
 
@@ -162,8 +174,4 @@ console.log(`Arithmetic: Total Fees = ${totalFees}, Remainder = ${remainder}`);
 console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensive}`);
 console.log(`Logical: Are both available? ${areBothAvailable}`);
 displayAllCourses();
-console.log(`Total Students: ${getTotalStudents()}`);
-console.log(findCourse("B.Tech"));
-console.log(addCourse("Ph.D", 300));
-console.log(courseNames);
-console.log(studentsCounts);
+checkStudents
