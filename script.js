@@ -1,1 +1,11 @@
-vvyvvy
+const contentContainer = document.querySelector('.content');
+const headerImage = document.querySelector('.header-image');
+const form = document.querySelector('form');
+const firstNameInput = document.querySelector('#fname');
+const middleNameInput = document.querySelector('#mname');
+const lastNameInput = document.querySelector('#lname');
+const usernameInput = document.querySelector("#username");
+const password = document.querySelector("#password");
+const submitButton = document.querySelector('input[type="submit"]');
+const coursesList = document.querySelector('.c');
+const coursesTable = document.querySelector('table');
