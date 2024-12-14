@@ -5,14 +5,13 @@ const firstNameInput = document.querySelector('#fname');
 const middleNameInput = document.querySelector('#mname');
 const lastNameInput = document.querySelector('#lname');
 const usernameInput = document.querySelector("#username");
-const password = document.querySelector("#password");
+const passwordInput = document.querySelector("#password");
 const submitButton = document.querySelector('input[type="submit"]');
 const coursesList = document.querySelector('.c');
 const coursesTable = document.querySelector('table');
 
 const universityName = "Future University";
-const totalCourses = 5;
-const studentsCount = 1500;
+let studentsCount = 1500;
 const isCollegeOpen = true;
 
 const courseNames = ["B.Tech", "B.C.A", "M.C.A", "B.Pharma", "MBA"];
@@ -60,7 +59,7 @@ let notAssigned = null;
 let unassignedVariable;
 
 
-let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee;
+let totalFees = courseDetails.BTech.fee + courseDetails.BCA.fee; 
 totalFees -= 10000; 
 totalFees *= 2; 
 totalFees /= 4; 
@@ -71,12 +70,12 @@ let isMoreExpensive = courseDetails.BPharma.fee > courseDetails.BCA.fee;
 let isEqualFee = courseDetails.BTech.fee == courseDetails.MCA?.fee; 
 
 
-let areBothAvailable = isCollegeOpen && isEngineeringAvailable; 
-let isAnyAvailable = isCollegeOpen || false;
-let isNotAvailable = !isCollegeOpen;
+let areBothAvailable = isCollegeOpen && (studentsCount > 1000); 
+let isAnyAvailable = isCollegeOpen || (studentsCount > 2000); 
+let isNotAvailable = !isCollegeOpen; 
 
 
-studentsCount += 500; 
+studentsCount += 500;
 studentsCount -= 200; 
 studentsCount *= 2; 
 studentsCount /= 4; 
@@ -84,14 +83,13 @@ studentsCount /= 4;
 
 let welcomeMessage = "Welcome to " + universityName; 
 
-console.log(universityName, totalCourses, studentsCount, isCollegeOpen, courseNames, courseDetails, notAssigned, unassignedVariable, totalFees, remainder, isMoreExpensive, isEqualFee, areBothAvailable, isAnyAvailable, isNotAvailable, welcomeMessage);
 
 function displayUniversityInfo() {
     console.log(`Welcome to ${universityName}`);
-    console.log(`Total Courses: ${totalCourses}`);
     console.log(`Total Students: ${studentsCount}`);
     console.log(`College Open: ${isCollegeOpen}`);
 }
+
 
 function displayCourseDetails(course) {
     const details = courseDetails[course];
@@ -99,7 +97,37 @@ function displayCourseDetails(course) {
     console.log(`Duration: ${details.duration}`);
     console.log(`Fee: ${details.fee}`);
     console.log(`Students: ${details.students}`);
+    console.log(`HOD: ${details.hod}`);
+}
+
+
+function calculateTotalFee() {
+    let totalFee = 0;
+    for (let course in courseDetails) {
+        totalFee += courseDetails[course].fee;
+    }
+    return totalFee;
+}
+
+
+function isCourseAvailable(courseName) {
+    return courseNames.includes(courseName);
+}
+
+
+function getHOD(courseName) {
+    if (courseDetails[courseName]) {
+        return courseDetails[courseName].hod;
+    }
+    return "Course not found";
 }
 
 displayUniversityInfo();
 displayCourseDetails("BTech");
+console.log(`Total Fee of all courses: ${calculateTotalFee()}`);
+console.log(`Is B.C.A available?: ${isCourseAvailable("B.C.A")}`);
+console.log(`Head of B.C.A department: ${getHOD("BCA")}`);
+console.log(welcomeMessage);
+console.log(`Arithmetic: Total Fees = ${totalFees}, Remainder = ${remainder}`);
+console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensive}`);
+console.log(`Logical: Are both available? ${areBothAvailable}`);
