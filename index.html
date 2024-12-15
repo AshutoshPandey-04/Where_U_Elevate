@@ -3,41 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Future University. Explore a range of courses including B.Tech, MBA, and more. Join us today for a brighter future.">
     <title>Future University</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="content">
-        <img src="https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop" alt="Future University" class="header-image">
-        <h1>Future University</h1>
-        <p class="p1">I am a student of B.Tech in Computer Science Engineering in Future Institute of Engineering & Technology.</p>
+        <img src="https://images.collegedunia.com/public/college_data/images/appImage/1645961494777.jpg?h=250&w=1000&mode=crop" alt="Future University Campus Image" class="header-image">
+        
+        <h1>Welcome to Future University</h1>
+        <p class="p1">I am a student of B.Tech in Computer Science Engineering at Future Institute of Engineering & Technology.</p>
 
-        <h2>There are many courses in our College</h2>
-        <h3>Management Courses:-</h3>
+        <h2>Explore Our Courses</h2>
+        <h3>Management Courses:</h3>
         <p class="p2">Management courses like BBA, MBA.</p>
 
-        <h3>Engineering Courses</h3>
-        <p class="p3">Engineering Courses like B.Tech, M.Tech, BCA, MCA.</p>
+        <h3>Engineering Courses:</h3>
+        <p class="p3">Engineering courses like B.Tech, M.Tech, BCA, MCA.</p>
 
-        <a href="https://www.futureuniversity.in/" target="_blank">Visit Future University</a>
+        <a href="https://www.futureuniversity.in/" target="_blank">Visit Future University Website</a>
 
-        <h5>If you want to know more about the B.Tech Course, you can visit the given link:</h5>
+        <h5>If you want to know more about the B.Tech Course, click the link below:</h5>
         <a href="https://www.futureuniversity.in/graduate-programmes/b-tech-in-computer-science-and-engineering" target="_blank">Information about B.Tech Course</a>
 
-        <h2>Number of Students we have in each Course</h2>
+        <h2>Course Enrollments</h2>
         <ol class="c">
-            <li>B.Tech - 1500+</li><br>
-            <li>B.C.A - 700+</li><br>
-            <li>M.C.A - 650+</li><br>
-            <li>B.Pharma - 1800+</li><br>
+            <li>B.Tech - 1500+</li>
+            <li>B.C.A - 700+</li>
+            <li>M.C.A - 650+</li>
+            <li>B.Pharma - 1800+</li>
         </ol>
 
-        <table border="1">
+        <table border="1" id="coursesTable">
             <thead>
                 <tr>
                     <th>Course Name</th>
                     <th>Duration</th>
-                    <th>Course Fee Structure</th>
+                    <th>Course Fee</th>
                     <th>H.O.D</th>
                 </tr>
             </thead>
@@ -63,20 +65,55 @@
             </tbody>
         </table>
 
-        <h3>Fill this form for more information.</h3>
-        <form>
+        <h3>Fill this form to get more information.</h3>
+        <form id="infoForm">
             <label for="fname">First Name:</label><br>
-            <input type="text" id="fname" name="fname"><br>
+            <input type="text" id="fname" name="fname" required><br><br>
+            
             <label for="mname">Middle Name:</label><br>
-            <input type="text" id="mname" name="mname"><br>
+            <input type="text" id="mname" name="mname"><br><br>
+            
             <label for="lname">Last Name:</label><br>
-            <input type="text" id="lname" name="lname"><br>
-            <label type="username">Username:</label><br>
-            <input type="text & symbol" id="Username" name="Username"><br><br>
-            <label for="username">Password:</label><br>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="text" id="lname" name="lname" required><br><br>
+            
+            <label for="Username">Username:</label><br>
+            <input type="text" id="Username" name="Username" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
             <input type="submit" value="Submit">
         </form>
+
+        <ul id="coursesList"></ul>
     </div>
+
+    <script type="module">
+        import { University } from './university.js';
+        import { Course } from './course.js';
+        import { CourseManager } from './courseManager.js';
+        import * as UI from './ui.js';
+        import * as Data from './data.js';
+
+        const courses = {
+            BTech: new Course("B.Tech", "4 Years", 70000, 1500, "Dr. Abhishek Saxena"),
+            BCA: new Course("B.C.A", "3 Years", 35000, 700, "Mr. Sachin Raj Saxena"),
+            MCA: new Course("M.C.A", "2 Years", 45000, 650, "Mr. Sachin Raj Saxena"),
+            BPharma: new Course("B.Pharma", "4 Years", 110000, 1800, "Dr. Rahul Shukla"),
+            MBA: new Course("MBA", "2 Years", 50000, 500, "Mr. Virendra")
+        };
+
+        const university = new University("Future University", 1500, true);
+
+        const courseManager = new CourseManager(courses);
+
+        university.displayInfo();
+        courseManager.displayAllCourses();
+        UI.populateCoursesList(courses);
+
+        document.getElementById('infoForm').addEventListener('submit', UI.handleFormSubmit);
+
+        UI.updateWelcomeMessage();
+    </script>
 </body>
 </html>
