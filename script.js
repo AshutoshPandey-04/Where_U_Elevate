@@ -1,4 +1,4 @@
-const data = {
+const defaultData = {
     university: {
         name: "Future University",
         studentsCount: 1500,
@@ -41,6 +41,18 @@ const data = {
             hod: "Mr. Virendra",
         }
     }
+};
+
+const loadData = () => {
+    const storedData = localStorage.getItem('universityData');
+    if (storedData) {
+        return JSON.parse(storedData); 
+    }
+    return defaultData;
+};
+
+const saveData = (data) => {
+    localStorage.setItem('universityData', JSON.stringify(data));  
 };
 
 class University {
@@ -159,6 +171,7 @@ class CourseManager {
         try {
             const newCourse = new Course(newCourseData);
             this.courses[newCourse.name] = newCourse;
+            saveData({ ...loadData(), courses: this.courses });  // Save the updated data to localStorage
             return `Course ${newCourse.name} added with ${newCourse.students} students`;
         } catch (error) {
             console.error(`Error in addCourse: ${error.message}`);
@@ -230,6 +243,7 @@ const addCourseRow = (courseName, studentCount) => {
     }
 };
 
+const data = loadData(); 
 const university = new University(data);
 const courseManager = new CourseManager(data.courses);
 
