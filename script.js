@@ -5,13 +5,13 @@ class University {
         this.isCollegeOpen = isCollegeOpen;
     }
 
-    displayInfo() {
+    displayInfo = () => {
         console.log(`Welcome to ${this.name}`);
         console.log(`Total Students: ${this.studentsCount}`);
         console.log(`College Open: ${this.isCollegeOpen}`);
     }
 
-    checkStudentsThreshold(threshold) {
+    checkStudentsThreshold = (threshold) => {
         if (this.studentsCount > threshold) {
             console.log(`Students count (${this.studentsCount}) is above the threshold (${threshold})`);
         } else if (this.studentsCount === threshold) {
@@ -31,7 +31,7 @@ class Course {
         this.hod = hod;
     }
 
-    displayDetails() {
+    displayDetails = () => {
         console.log(`Course: ${this.name}`);
         console.log(`Duration: ${this.duration}`);
         console.log(`Fee: ${this.fee}`);
@@ -45,36 +45,21 @@ class CourseManager {
         this.courses = courses;
     }
 
-    calculateTotalFee() {
-        let totalFee = 0;
-        for (let course in this.courses) {
-            totalFee += this.courses[course].fee;
-        }
-        return totalFee;
+    calculateTotalFee = () => Object.values(this.courses).reduce((total, course) => total + course.fee, 0);
+
+    isCourseAvailable = (courseName) => courseName in this.courses;
+
+    getHOD = (courseName) => this.courses[courseName]?.hod || "Course not found";
+
+    displayAllCourses = () => {
+        Object.values(this.courses).forEach(course => course.displayDetails());
     }
 
-    isCourseAvailable(courseName) {
-        return this.courses.hasOwnProperty(courseName);
-    }
+    findCourse = (courseName) => this.courses[courseName] 
+        ? `Course found: ${this.courses[courseName].name} with ${this.courses[courseName].students} students` 
+        : "Course not found";
 
-    getHOD(courseName) {
-        return this.courses[courseName] ? this.courses[courseName].hod : "Course not found";
-    }
-
-    displayAllCourses() {
-        for (let course in this.courses) {
-            const details = this.courses[course];
-            console.log(`Course: ${details.name}, Students: ${details.students}`);
-        }
-    }
-
-    findCourse(courseName) {
-        return this.courses[courseName] 
-            ? `Course found: ${this.courses[courseName].name} with ${this.courses[courseName].students} students` 
-            : "Course not found";
-    }
-
-    addCourse(newCourse) {
+    addCourse = (newCourse) => {
         this.courses[newCourse.name] = newCourse;
         return `Course ${newCourse.name} added with ${newCourse.students} students`;
     }
@@ -97,107 +82,77 @@ courseManager.courses.BTech.displayDetails();
 console.log(`Total Fee of all courses: ${courseManager.calculateTotalFee()}`);
 console.log(`Is B.C.A available?: ${courseManager.isCourseAvailable("BCA")}`);
 console.log(`Head of B.C.A department: ${courseManager.getHOD("BCA")}`);
-console.log(`Arithmetic: Total Fees = ${totalFees}, Remainder = ${remainder}`);
-console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensive}`);
-console.log(`Logical: Are both available? ${areBothAvailable}`);
 courseManager.displayAllCourses();
 university.checkStudentsThreshold(1000);
 
-headerImage.addEventListener('click', () => {
-    alert('Header image clicked!');
-});
+document.getElementById('headerImage')?.addEventListener('click', () => alert('Header image clicked!'));
 
-form.addEventListener('submit', (e) => {
+document.getElementById('form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(`Submitted: ${firstNameInput.value} ${middleNameInput.value} ${lastNameInput.value}`);
+    const [firstNameInput, middleNameInput, lastNameInput] = ['firstName', 'middleName', 'lastName'].map(id => document.getElementById(id));
+    console.log(`Submitted: ${firstNameInput?.value} ${middleNameInput?.value} ${lastNameInput?.value}`);
 });
 
-usernameInput.addEventListener('focus', () => {
-    console.log('Username input focused.');
-});
+document.getElementById('usernameInput')?.addEventListener('focus', () => console.log('Username input focused.'));
+document.getElementById('passwordInput')?.addEventListener('blur', () => console.log('Password input blurred.'));
+document.getElementById('coursesList')?.addEventListener('mouseover', () => console.log('Hovered over the courses list.'));
 
-passwordInput.addEventListener('blur', () => {
-    console.log('Password input blurred.');
-});
-
-coursesList.addEventListener('mouseover', () => {
-    console.log('Hovered over the courses list.');
-});
-
-function updateWelcomeMessage() {
+const updateWelcomeMessage = () => {
     const welcomeElement = document.querySelector('.welcome-message');
-    if (welcomeElement) {
-        welcomeElement.textContent = welcomeMessage;
-    }
-}
+    if (welcomeElement) welcomeElement.textContent = 'Welcome to our University Portal';
+};
 
-function populateCoursesList() {
+const populateCoursesList = () => {
+    const coursesList = document.getElementById('coursesList');
     if (coursesList) {
         coursesList.innerHTML = '';
-        courseNames.forEach(course => {
+        Object.keys(courses).forEach(course => {
             const listItem = document.createElement('li');
             listItem.textContent = course;
             coursesList.appendChild(listItem);
         });
     }
-}
+};
 
-function addCourseRow(courseName, studentCount) {
+const addCourseRow = (courseName, studentCount) => {
+    const coursesTable = document.getElementById('coursesTable');
     if (coursesTable) {
         const newRow = coursesTable.insertRow();
-        const courseCell = newRow.insertCell(0);
-        const studentCell = newRow.insertCell(1);
+        const [courseCell, studentCell] = [newRow.insertCell(0), newRow.insertCell(1)];
         courseCell.textContent = courseName;
         studentCell.textContent = studentCount;
     }
-}
+};
 
 updateWelcomeMessage();
 populateCoursesList();
 addCourseRow('New Course', 100);
 
-function getCourseDetailsAsJSON(courseName) {
-    return JSON.stringify(courseDetails[courseName]);
-}
+const getCourseDetailsAsJSON = (courseName) => JSON.stringify(courses[courseName]);
 
-function loadCourseDetailsFromJSON(jsonString) {
+const loadCourseDetailsFromJSON = (jsonString) => {
     const course = JSON.parse(jsonString);
     if (course.name) {
-        courseDetails[course.name.replace(/\./g, '')] = course;
+        courses[course.name.replace(/\./g, '')] = course;
         return `Course ${course.name} loaded from JSON`;
     }
     return 'Invalid course JSON data';
-}
+};
 
-function fetchCourseDetails(courseName) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `https://example.com/api/courses/${courseName}`, true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                const course = JSON.parse(xhr.responseText);
-                console.log(`Fetched Course: ${course.name}, Fee: ${course.fee}`);
-                courseDetails[course.name.replace(/\./g, '')] = course;
-                resolve(course);
-            } else {
-                reject(`Failed to fetch course details: ${xhr.statusText}`);
-            }
-        };
-        xhr.onerror = function () {
-            reject('Error during AJAX request');
-        };
-        xhr.send();
-    });
-}
+const fetchCourseDetails = (courseName) => new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `https://example.com/api/courses/${courseName}`, true);
+    xhr.onload = () => xhr.status === 200 
+        ? resolve(JSON.parse(xhr.responseText)) 
+        : reject(`Failed to fetch course details: ${xhr.statusText}`);
+    xhr.onerror = () => reject('Error during AJAX request');
+    xhr.send();
+});
 
 const courseJson = getCourseDetailsAsJSON('BTech');
 console.log(`Course JSON: ${courseJson}`);
 console.log(loadCourseDetailsFromJSON(courseJson));
 
 fetchCourseDetails('BTech')
-    .then(course => {
-        console.log(`Course loaded: ${course.name}`);
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    .then(course => console.log(`Course loaded: ${course.name}`))
+    .catch(error => console.log(error));
