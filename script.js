@@ -124,7 +124,6 @@ class CourseManager {
     }
 }
 
-// DOM Manipulation with Error Handling
 const headerImage = document.getElementById('headerImage');
 if (headerImage) {
     headerImage.addEventListener('click', () => alert('Header image clicked!'));
@@ -172,7 +171,6 @@ if (coursesList) {
     console.error('Courses list not found');
 }
 
-// Course Table Row Insertion with Error Handling
 const addCourseRow = (courseName, studentCount) => {
     const coursesTable = document.getElementById('coursesTable');
     if (coursesTable) {
@@ -189,7 +187,26 @@ const addCourseRow = (courseName, studentCount) => {
     }
 };
 
-// JSON Operations with Error Handling
+const validateCourseName = (courseName) => {
+    const regex = /^[A-Za-z0-9 .-]+$/; 
+    return regex.test(courseName);
+};
+
+const validateFee = (fee) => {
+    const regex = /^[0-9]+$/;
+    return regex.test(fee);
+};
+
+const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+    return regex.test(email);
+};
+
+const validatePhoneNumber = (phone) => {
+    const regex = /^[0-9]{10}$/; 
+    return regex.test(phone);
+};
+
 const getCourseDetailsAsJSON = (courseName) => {
     try {
         if (!(courseName in courses)) {
@@ -198,7 +215,7 @@ const getCourseDetailsAsJSON = (courseName) => {
         return JSON.stringify(courses[courseName]);
     } catch (error) {
         console.error(`Error in getCourseDetailsAsJSON: ${error.message}`);
-        return '{}'; // Returning empty JSON in case of error
+        return '{}'; 
     }
 };
 
@@ -217,7 +234,6 @@ const loadCourseDetailsFromJSON = (jsonString) => {
     }
 };
 
-// Fetch Course Details with Error Handling
 const fetchCourseDetails = (courseName) => {
     return fetch(`https://example.com/api/courses/${courseName}`)
         .then(response => {
@@ -234,7 +250,6 @@ const fetchCourseDetails = (courseName) => {
         });
 };
 
-// Example Usage
 const university = new University("Future University", 1500, true);
 const courses = {
     BTech: new Course("B.Tech", "4 Years", 70000, 1500, "Dr. Abhishek Saxena"),
@@ -255,6 +270,18 @@ courseManager.displayAllCourses();
 university.checkStudentsThreshold(1000);
 
 addCourseRow('New Course', 100);
+
+console.log(validateCourseName('B.Tech'));
+console.log(validateCourseName('B@Tech'));
+
+console.log(validateFee('50000')); 
+console.log(validateFee('50a00')); 
+
+console.log(validateEmail('test@example.com')); 
+console.log(validateEmail('invalid-email.com')); 
+
+console.log(validatePhoneNumber('1234567890')); 
+console.log(validatePhoneNumber('123-456-7890'));
 
 const courseJson = getCourseDetailsAsJSON('BTech');
 console.log(`Course JSON: ${courseJson}`);
