@@ -157,7 +157,6 @@ console.log(`Comparison: Is B.Pharma more expensive than B.C.A? ${isMoreExpensiv
 console.log(`Logical: Are both available? ${areBothAvailable}`);
 displayAllCourses();
 
-
 headerImage.addEventListener('click', () => {
     alert('Header image clicked!');
 });
@@ -178,3 +177,36 @@ passwordInput.addEventListener('blur', () => {
 coursesList.addEventListener('mouseover', () => {
     console.log('Hovered over the courses list.');
 });
+
+
+function updateWelcomeMessage() {
+    const welcomeElement = document.querySelector('.welcome-message');
+    if (welcomeElement) {
+        welcomeElement.textContent = welcomeMessage;
+    }
+}
+
+function populateCoursesList() {
+    if (coursesList) {
+        coursesList.innerHTML = '';
+        courseNames.forEach(course => {
+            const listItem = document.createElement('li');
+            listItem.textContent = course;
+            coursesList.appendChild(listItem);
+        });
+    }
+}
+
+function addCourseRow(courseName, studentCount) {
+    if (coursesTable) {
+        const newRow = coursesTable.insertRow();
+        const courseCell = newRow.insertCell(0);
+        const studentCell = newRow.insertCell(1);
+        courseCell.textContent = courseName;
+        studentCell.textContent = studentCount;
+    }
+}
+
+updateWelcomeMessage();
+populateCoursesList();
+addCourseRow('New Course', 100);
