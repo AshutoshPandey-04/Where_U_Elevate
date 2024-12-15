@@ -2,7 +2,6 @@ import Course from './course.js';
 
 export default class CourseManager {
     constructor(coursesData) {
-        // Creating course instances using course data from the data object
         this.courses = Object.keys(coursesData).reduce((acc, courseName) => {
             acc[courseName] = new Course(coursesData[courseName]);
             return acc;

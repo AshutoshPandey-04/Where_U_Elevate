@@ -15,6 +15,7 @@ export const populateCoursesList = (courses) => {
     }
 };
 
+
 export const addCourseRow = (courseName, studentCount) => {
     const coursesTable = document.getElementById('coursesTable');
     if (coursesTable) {

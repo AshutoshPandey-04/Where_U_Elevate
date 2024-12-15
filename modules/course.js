@@ -15,3 +15,4 @@ export default class Course {
         console.log(`HOD: ${this.hod}`);
     }
 }
+

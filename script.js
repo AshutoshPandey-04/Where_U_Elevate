@@ -28,3 +28,4 @@ const newCourseData = {
 console.log(courseManager.addCourse(newCourseData));
 
 saveData(data);
+

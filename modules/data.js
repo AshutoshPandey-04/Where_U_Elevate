@@ -54,3 +54,4 @@ export const loadData = () => {
 export const saveData = (data) => {
     localStorage.setItem('universityData', JSON.stringify(data));  
 };
+
