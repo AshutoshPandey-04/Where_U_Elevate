@@ -178,7 +178,6 @@ coursesList.addEventListener('mouseover', () => {
     console.log('Hovered over the courses list.');
 });
 
-
 function updateWelcomeMessage() {
     const welcomeElement = document.querySelector('.welcome-message');
     if (welcomeElement) {
@@ -210,3 +209,16 @@ function addCourseRow(courseName, studentCount) {
 updateWelcomeMessage();
 populateCoursesList();
 addCourseRow('New Course', 100);
+
+function getCourseDetailsAsJSON(courseName) {
+    return JSON.stringify(courseDetails[courseName]);
+}
+
+function loadCourseDetailsFromJSON(jsonString) {
+    const course = JSON.parse(jsonString);
+    if (course.name) {
+        courseDetails[course.name.replace(/\./g, '')] = course; 
+        return `Course ${course.name} loaded from JSON`;
+    }
+    return 'Invalid course JSON data';
+}
