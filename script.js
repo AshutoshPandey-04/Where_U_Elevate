@@ -171,12 +171,35 @@ class CourseManager {
         try {
             const newCourse = new Course(newCourseData);
             this.courses[newCourse.name] = newCourse;
-            saveData({ ...loadData(), courses: this.courses });  // Save the updated data to localStorage
+            saveData({ ...loadData(), courses: this.courses });  
             return `Course ${newCourse.name} added with ${newCourse.students} students`;
         } catch (error) {
             console.error(`Error in addCourse: ${error.message}`);
             return 'Error adding course';
         }
+    }
+
+    fetchCourseDetailsFromAPI = (courseName) => {
+        return fetch(`https://example.com/api/courses/${courseName}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error fetching course data: ${response.statusText}`);
+                }
+                return response.json();  
+            })
+            .then(courseData => {
+
+                if (courseData.name) {
+                    this.courses[courseData.name] = new Course(courseData);
+                    saveData({ ...loadData(), courses: this.courses });  
+                    console.log(`Course ${courseData.name} successfully fetched and added.`);
+                } else {
+                    console.error('Fetched data does not contain valid course information.');
+                }
+            })
+            .catch(error => {
+                console.error(`Error in fetchCourseDetailsFromAPI: ${error.message}`);
+            });
     }
 }
 
@@ -265,3 +288,5 @@ const newCourseData = {
 console.log(courseManager.addCourse(newCourseData));
 
 addCourseRow('New Course', 100);
+
+courseManager.fetchCourseDetailsFromAPI('BTech');
