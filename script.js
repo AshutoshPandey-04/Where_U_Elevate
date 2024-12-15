@@ -224,27 +224,34 @@ function loadCourseDetailsFromJSON(jsonString) {
 }
 
 function fetchCourseDetails(courseName) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `https://example.com/api/courses/${courseName}`, true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            const course = JSON.parse(xhr.responseText);
-            console.log(`Fetched Course: ${course.name}, Fee: ${course.fee}`);
-            courseDetails[course.name.replace(/\./g, '')] = course;
-        } else {
-            console.log(`Failed to fetch course details: ${xhr.statusText}`);
-        }
-    };
-    xhr.onerror = function () {
-        console.log('Error during AJAX request');
-    };
-    xhr.send();
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `https://example.com/api/courses/${courseName}`, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const course = JSON.parse(xhr.responseText);
+                console.log(`Fetched Course: ${course.name}, Fee: ${course.fee}`);
+                courseDetails[course.name.replace(/\./g, '')] = course;
+                resolve(course);
+            } else {
+                reject(`Failed to fetch course details: ${xhr.statusText}`);
+            }
+        };
+        xhr.onerror = function () {
+            reject('Error during AJAX request');
+        };
+        xhr.send();
+    });
 }
 
 const courseJson = getCourseDetailsAsJSON('BTech');
 console.log(`Course JSON: ${courseJson}`);
 console.log(loadCourseDetailsFromJSON(courseJson));
 
-fetchCourseDetails('BTech');
-fetchCourseDetails('B.Pharm');
-
+fetchCourseDetails('BTech')
+    .then(course => {
+        console.log(`Course loaded: ${course.name}`);
+    })
+    .catch(error => {
+        console.log(error);
+    });
