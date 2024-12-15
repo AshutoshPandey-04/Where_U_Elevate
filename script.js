@@ -1,8 +1,53 @@
+const data = {
+    university: {
+        name: "Future University",
+        studentsCount: 1500,
+        isCollegeOpen: true,
+    },
+    courses: {
+        BTech: {
+            name: "B.Tech",
+            duration: "4 Years",
+            fee: 70000,
+            students: 1500,
+            hod: "Dr. Abhishek Saxena",
+        },
+        BCA: {
+            name: "B.C.A",
+            duration: "3 Years",
+            fee: 35000,
+            students: 700,
+            hod: "Mr. Sachin Raj Saxena",
+        },
+        MCA: {
+            name: "M.C.A",
+            duration: "2 Years",
+            fee: 45000,
+            students: 650,
+            hod: "Mr. Sachin Raj Saxena",
+        },
+        BPharma: {
+            name: "B.Pharma",
+            duration: "4 Years",
+            fee: 110000,
+            students: 1800,
+            hod: "Dr. Rahul Shukla",
+        },
+        MBA: {
+            name: "MBA",
+            duration: "2 Years",
+            fee: 50000,
+            students: 500,
+            hod: "Mr. Virendra",
+        }
+    }
+};
+
 class University {
-    constructor(name, studentsCount, isCollegeOpen) {
-        this.name = name;
-        this.studentsCount = studentsCount;
-        this.isCollegeOpen = isCollegeOpen;
+    constructor(data) {
+        this.name = data.university.name;
+        this.studentsCount = data.university.studentsCount;
+        this.isCollegeOpen = data.university.isCollegeOpen;
     }
 
     displayInfo = () => {
@@ -30,12 +75,12 @@ class University {
 }
 
 class Course {
-    constructor(name, duration, fee, students, hod) {
-        this.name = name;
-        this.duration = duration;
-        this.fee = fee;
-        this.students = students;
-        this.hod = hod;
+    constructor(courseData) {
+        this.name = courseData.name;
+        this.duration = courseData.duration;
+        this.fee = courseData.fee;
+        this.students = courseData.students;
+        this.hod = courseData.hod;
     }
 
     displayDetails = () => {
@@ -48,15 +93,15 @@ class Course {
 }
 
 class CourseManager {
-    constructor(courses) {
-        this.courses = courses;
+    constructor(coursesData) {
+        this.courses = Object.keys(coursesData).reduce((acc, courseName) => {
+            acc[courseName] = new Course(coursesData[courseName]);
+            return acc;
+        }, {});
     }
 
     calculateTotalFee = () => {
         try {
-            if (!Array.isArray(this.courses)) {
-                throw new Error('Courses should be an array');
-            }
             return Object.values(this.courses).reduce((total, course) => total + course.fee, 0);
         } catch (error) {
             console.error(`Error in calculateTotalFee: ${error.message}`);
@@ -110,11 +155,9 @@ class CourseManager {
         }
     };
 
-    addCourse = (newCourse) => {
+    addCourse = (newCourseData) => {
         try {
-            if (!(newCourse instanceof Course)) {
-                throw new Error('Provided object is not a valid Course');
-            }
+            const newCourse = new Course(newCourseData);
             this.courses[newCourse.name] = newCourse;
             return `Course ${newCourse.name} added with ${newCourse.students} students`;
         } catch (error) {
@@ -187,79 +230,8 @@ const addCourseRow = (courseName, studentCount) => {
     }
 };
 
-const validateCourseName = (courseName) => {
-    const regex = /^[A-Za-z0-9 .-]+$/; 
-    return regex.test(courseName);
-};
-
-const validateFee = (fee) => {
-    const regex = /^[0-9]+$/;
-    return regex.test(fee);
-};
-
-const validateEmail = (email) => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
-    return regex.test(email);
-};
-
-const validatePhoneNumber = (phone) => {
-    const regex = /^[0-9]{10}$/; 
-    return regex.test(phone);
-};
-
-const getCourseDetailsAsJSON = (courseName) => {
-    try {
-        if (!(courseName in courses)) {
-            throw new Error('Course not found');
-        }
-        return JSON.stringify(courses[courseName]);
-    } catch (error) {
-        console.error(`Error in getCourseDetailsAsJSON: ${error.message}`);
-        return '{}'; 
-    }
-};
-
-const loadCourseDetailsFromJSON = (jsonString) => {
-    try {
-        const course = JSON.parse(jsonString);
-        if (course.name && course.duration && course.fee) {
-            courses[course.name.replace(/\./g, '')] = course;
-            return `Course ${course.name} loaded from JSON`;
-        } else {
-            throw new Error('Invalid course data');
-        }
-    } catch (error) {
-        console.error(`Error in loadCourseDetailsFromJSON: ${error.message}`);
-        return 'Invalid course JSON data';
-    }
-};
-
-const fetchCourseDetails = (courseName) => {
-    return fetch(`https://example.com/api/courses/${courseName}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Failed to fetch course details: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(course => {
-            console.log(`Course loaded: ${course.name}`);
-        })
-        .catch(error => {
-            console.error(`Error fetching course details: ${error.message}`);
-        });
-};
-
-const university = new University("Future University", 1500, true);
-const courses = {
-    BTech: new Course("B.Tech", "4 Years", 70000, 1500, "Dr. Abhishek Saxena"),
-    BCA: new Course("B.C.A", "3 Years", 35000, 700, "Mr. Sachin Raj Saxena"),
-    MCA: new Course("M.C.A", "2 Years", 45000, 650, "Mr. Sachin Raj Saxena"),
-    BPharma: new Course("B.Pharma", "4 Years", 110000, 1800, "Dr. Rahul Shukla"),
-    MBA: new Course("MBA", "2 Years", 50000, 500, "Mr. Virendra"),
-};
-
-const courseManager = new CourseManager(courses);
+const university = new University(data);
+const courseManager = new CourseManager(data.courses);
 
 university.displayInfo();
 courseManager.courses.BTech.displayDetails();
@@ -269,24 +241,13 @@ console.log(`Head of B.C.A department: ${courseManager.getHOD("BCA")}`);
 courseManager.displayAllCourses();
 university.checkStudentsThreshold(1000);
 
+const newCourseData = {
+    name: 'MTech',
+    duration: '2 Years',
+    fee: 90000,
+    students: 400,
+    hod: 'Dr. Sharma'
+};
+console.log(courseManager.addCourse(newCourseData));
+
 addCourseRow('New Course', 100);
-
-console.log(validateCourseName('B.Tech'));
-console.log(validateCourseName('B@Tech'));
-
-console.log(validateFee('50000')); 
-console.log(validateFee('50a00')); 
-
-console.log(validateEmail('test@example.com')); 
-console.log(validateEmail('invalid-email.com')); 
-
-console.log(validatePhoneNumber('1234567890')); 
-console.log(validatePhoneNumber('123-456-7890'));
-
-const courseJson = getCourseDetailsAsJSON('BTech');
-console.log(`Course JSON: ${courseJson}`);
-console.log(loadCourseDetailsFromJSON(courseJson));
-
-fetchCourseDetails('BTech')
-    .then(course => console.log(`Course loaded: ${course.name}`))
-    .catch(error => console.error(`Failed to fetch course details: ${error.message}`));
