@@ -12,82 +12,45 @@ body {
 }
 
 .content {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);  
+    padding: 25px;
     border-radius: 10px;
     width: 90%;
-    max-width: 600px;
+    max-width: 700px;
     text-align: center;
     box-sizing: border-box;
-}
-
-h1, h2, h3, h4, h5, p, ol, table, form {
-    margin: 20px 0;
-    display: inline-block;
-    box-sizing: border-box;
-}
-
-form {
-    margin-top: 20px;
-    text-align: center;
-}
-
-form label {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-form input[type="text"],
-form input[type="submit"] {
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-}
-
-form input[type="submit"] {
-    background-color: #3b8d99;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-form input[type="submit"]:hover {
-    background-color: #2a6774;
-}
-
-.header-image {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4); 
 }
 
 h1 {
     background-color: rgba(0, 0, 0, 0.7);
     color: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 2.5em;
+    margin-top: 0;
+    font-weight: bold;
 }
 
-.p1 {
-    font-family: "Times New Roman", Times, serif;
+h2, h3, h4, h5 {
+    color: var(--blue);
+    margin-bottom: 10px;
+    font-size: 1.8em;
 }
 
-.p2 {
-    font-family: 'Times New Roman', Times, serif;
+h2 {
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 10px;
 }
 
-.p3 {
-    font-family: 'Times New Roman', Times, serif;
+h3, h4 {
+    font-size: 1.4em;
 }
 
-a:link {
-    color: tomato;
-    display: inline-block;
-    margin: 10px 0;
+p, ol, ul {
+    margin: 20px 0;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
 ul.a {
@@ -110,6 +73,8 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
 table, th, td {
@@ -119,21 +84,78 @@ table, th, td {
 th, td {
     padding: 10px;
     text-align: left;
+    color: #ffffff;
 }
 
-li {
-    display: inline;
+th {
+    background-color: var(--blue);
 }
 
-div.static {
-    position: static;
-    border: 3px solid #91f307;
+form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+form label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    font-size: 1.1em;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border: 2px solid var(--blue);
+    outline: none;
+}
+
+form input[type="submit"] {
+    background-color: var(--blue);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #3b8d99;
+    transform: scale(1.05);
+}
+
+a:link, a:visited {
+    color: tomato;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+a:hover {
+    color: #FF6347;
+    text-decoration: underline;
+}
+
+.header-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .flex-container {
     display: flex;
     justify-content: space-around;
     border: 3px solid #91f307;
+    padding: 10px;
+    flex-wrap: wrap;
 }
 
 .flex-container > div {
@@ -144,6 +166,7 @@ div.static {
     text-align: center;
     line-height: 75px;
     font-size: 30px;
+    border-radius: 5px;
 }
 
 .col-1 { width: 8.33%; }
@@ -160,27 +183,59 @@ div.static {
 .col-12 { width: 100%; }
 
 @media only screen and (max-width: 768px) {
-
     [class*="col-"] {
         width: 100%;
     }
 }
 
 :root {
-    --blue: #6495ed;
-    --white: #faf0e6;
+    --blue: #6495ed; 
+    --white: #faf0e6; 
 }
 
-h2 { border-bottom: 2px solid var(--blue); }
+#coursesList {
+    list-style: none;
+    padding: 0;
+}
+
+#coursesList li {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#coursesList li:hover {
+    background-color: var(--blue);
+    cursor: pointer;
+}
+
+div.static {
+    position: static;
+    border: 3px solid #91f307;
+}
 
 .container {
     color: var(--blue);
     background-color: var(--white);
     padding: 15px;
 }
+
 button {
     background-color: var(--white);
     color: var(--blue);
     border: 1px solid var(--blue);
     padding: 5px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--blue);
+    color: white;
+    transform: scale(1.05);
 }
